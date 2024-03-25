@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BurgerPhotoAppTheme {
-                // App de hamburguesas inicial sin Model
+                // App de hamburguesas inicial sin Model con un solo link de salida
                 BurgerApp()
             }
         }
