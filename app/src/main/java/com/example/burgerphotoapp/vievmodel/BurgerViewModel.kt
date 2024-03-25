@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.burgerphotoapp.network.BurgerApi
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 class BurgerViewModel : ViewModel() {
     var burgerUiState by mutableStateOf("")
@@ -16,10 +17,17 @@ class BurgerViewModel : ViewModel() {
         getBurgerPhotos()
     }
 
-    private fun getBurgerPhotos() {
+    fun getBurgerPhotos() {
         viewModelScope.launch {
-            val listResult = BurgerApi.retrofitService.getPhotos()
-            burgerUiState = listResult
+            try {
+                val listResult = BurgerApi.retrofitService.getPhotos()
+                burgerUiState = listResult.toString()
+            // Convertir la lista a String
+            } catch (e: IOException) {
+                // Manejar la excepción si es necesario
+                // Por ejemplo, puedes establecer burgerUiState en un valor de error
+                burgerUiState = "Error: ${e.message}"
+            }
         }
     }
 }
