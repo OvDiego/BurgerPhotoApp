@@ -9,25 +9,31 @@ import com.example.burgerphotoapp.network.BurgerApi
 import kotlinx.coroutines.launch
 import java.io.IOException
 
+sealed interface BurgerUiState{
+    data class Success(val photos:String) : BurgerUiState
+    object Error: BurgerUiState
+    object Loading:BurgerUiState
+}
+
+
+
 class BurgerViewModel : ViewModel() {
-    var burgerUiState by mutableStateOf("")
+    var burgerUiState:BurgerUiState by mutableStateOf(BurgerUiState.Loading)
         private set
 
     init {
         getBurgerPhotos()
     }
 
-    fun getBurgerPhotos() {
+    private  fun getBurgerPhotos(){
         viewModelScope.launch {
-            try {
+            burgerUiState = try {
                 val listResult = BurgerApi.retrofitService.getPhotos()
-                burgerUiState = listResult.toString()
-            // Convertir la lista a String
-            } catch (e: IOException) {
-                // Manejar la excepción si es necesario
-                // Por ejemplo, puedes establecer burgerUiState en un valor de error
-                burgerUiState = "Error: ${e.message}"
+                BurgerUiState.Success(listResult)
+            } catch (e: IOException){
+                BurgerUiState.Error
             }
         }
     }
+
 }
