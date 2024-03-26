@@ -1,7 +1,7 @@
 package com.example.burgerphotoapp.network
 
 
-import com.example.burgerphotoapp.model.BurgerPhoto
+import com.example.burgerphotoapp.model.BurgerResult
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -19,7 +19,8 @@ private val retrofit = Retrofit.Builder()
 
 interface BurgerApiService{
     @GET("complexSearch?apiKey=d3b86ff00a6545158882335cfee84321&query=burger&maxFat=25&number=10")
-    suspend fun getPhotos():List<BurgerPhoto>
+    suspend fun getPhotos():List<BurgerResult>
+    //suspend fun getPhotos():List<BurgerPhoto>
 }
 
 object BurgerApi{
