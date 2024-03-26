@@ -25,15 +25,15 @@ class BurgerViewModel : ViewModel() {
         getBurgerPhotos()
     }
 
+
     private  fun getBurgerPhotos(){
         viewModelScope.launch {
             burgerUiState = try {
                 val listResult = BurgerApi.retrofitService.getPhotos()
-                BurgerUiState.Success(listResult)
+                BurgerUiState.Success("Número de fotos de hamburgesas es ${listResult.size}")
             } catch (e: IOException){
                 BurgerUiState.Error
             }
         }
     }
-
 }
