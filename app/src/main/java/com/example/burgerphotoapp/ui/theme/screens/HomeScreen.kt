@@ -26,7 +26,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.burgerphotoapp.R
 import com.example.burgerphotoapp.model.BurgerPhoto
-import com.example.burgerphotoapp.model.BurgerResult
+//import com.example.burgerphotoapp.model.Result
 import com.example.burgerphotoapp.vievmodel.BurgerUiState
 
 
@@ -82,13 +82,13 @@ fun ErrorScreen(modifier: Modifier = Modifier){
 
 
 @Composable
-fun BurgerPhotoCard(photo: BurgerResult, modifier: Modifier){
+fun BurgerPhotoCard(photo: BurgerPhoto, modifier: Modifier){
     AsyncImage(model = ImageRequest.Builder(context = LocalContext.current)
         .data(photo.image)
         .crossfade(true)
         .build()
         ,
-        contentDescription = stringResource(id = 0) ,
+        contentDescription = stringResource(id = R.string.burger_image) ,
         modifier = modifier
     )
 }

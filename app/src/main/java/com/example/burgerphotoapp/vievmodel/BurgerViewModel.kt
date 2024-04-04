@@ -5,13 +5,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.burgerphotoapp.model.BurgerResult
+import com.example.burgerphotoapp.model.BurgerPhoto
+//import com.example.burgerphotoapp.model.Result
 import com.example.burgerphotoapp.network.BurgerApi
 import kotlinx.coroutines.launch
 import java.io.IOException
 
+
+
+
 sealed interface BurgerUiState{
-    data class Success(val photos: BurgerResult) : BurgerUiState
+    data class Success(val photos: BurgerPhoto) : BurgerUiState
     object Error: BurgerUiState
     object Loading:BurgerUiState
 }
